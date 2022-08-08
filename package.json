@@ -1,0 +1,17 @@
+{
+  "name": "videosharing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "server-start": "cd server && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "eslint": "^8.21.0",
+    "prettier": "^2.7.1"
+  }
+}

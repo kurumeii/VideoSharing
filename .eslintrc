@@ -1,0 +1,17 @@
+{
+  "plugins": ["react"],
+  "extends": ["react-app", "plugin:react/recommend"],
+  "rules": {
+    "prettier/prettier": ["warn", {"singleQuote": true}],
+    "no-extra-boolean-cast": "off"
+  },
+  "env": {
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
+}
