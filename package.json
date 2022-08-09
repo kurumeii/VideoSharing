@@ -4,7 +4,8 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "server-start": "cd server && npm start"
+    "client-start": "cd client && yarn start",
+    "server-start": "cd server && yarn start"
   },
   "keywords": [],
   "author": "",
