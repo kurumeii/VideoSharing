@@ -3,11 +3,11 @@
 ## Introduction
 -----------------------
 
-<b>> You</b>: So what the hell is this exactly ?
-<b>@kurumeii</b>: The title is self-explainatory. It's a cheap ass clone from youtube 2020.
-<b>> You</b>: But why ?
-<b>@kurumeii</b>: Ehh~ i was bored af and i have nothing to do so i choose this to kill my boredom and at the same time practicing my skills as a Web Dev. That's all really
-<b>> You</b>: Hmm... Were you THAT bored ? i mean don't you have work to do ?
+<b>> You</b>: So what the hell is this exactly ?\
+<b>@kurumeii</b>: The title is self-explainatory. It's a cheap ass clone from youtube 2020.\
+<b>> You</b>: But why ?\
+<b>@kurumeii</b>: Ehh~ i was bored af and i have nothing to do so i choose this to kill my boredom and at the same time practicing my skills as a Web Dev. That's all really\
+<b>> You</b>: Hmm... Were you THAT bored ? i mean don't you have work to do ?\
 <b>@kurumeii</b>: Close. I DO have some stuff to deal with but tbh, i don't want to, i don't like C#, i don't like plain old JavaScript. I am young and i want to exprience new things not some old shit like .net framework 4.5 ???
 
 -----------------------
