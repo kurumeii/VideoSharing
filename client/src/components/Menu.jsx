@@ -5,13 +5,14 @@ import {
   HelpOutline,
   History,
   Home,
+  NightlightRound,
   Settings,
   Subscriptions,
   VideoLibrary,
   WbSunny,
 } from '@mui/icons-material'
-import { useEffect } from 'react'
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import LogoImage from '../img/website-logo.png'
 
@@ -24,9 +25,9 @@ const MenuWrapper = styled.div`
   position: sticky;
   top: 0;
   overflow-y: auto;
-
   scrollbar-color: hsla(0, 0%, 53.3%, 0.4) rgba(0, 0, 0, 0) !important;
   scrollbar-width: thin !important;
+  overscroll-behavior: contain;
 `
 const MenuBar = styled.div`
   padding: 1rem 0;
@@ -35,14 +36,14 @@ const MenuBar = styled.div`
 const Logo = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   font-weight: bold;
   margin-bottom: 2rem;
-  padding: 0 1.5rem;
   user-select: none;
 `
 const Image = styled.img`
-  height: 25px;
+  height: 2rem;
 `
 const MenuItem = styled.div`
   display: flex;
@@ -78,8 +79,8 @@ const LoginButton = styled.button`
 `
 
 export default function Menu(props) {
-  const { setDarkMode } = props
-
+  const { darkMode, setDarkMode } = props
+  const [isHovered, setHover] = useState(false)
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme')
     setDarkMode(savedTheme === 'true')
@@ -92,13 +93,23 @@ export default function Menu(props) {
     })
   }, [setDarkMode])
 
+  const showScrollBar = () => setHover(true)
+
+  const hideScrollBar = () => setHover(false)
+
   return (
-    <MenuWrapper>
+    <MenuWrapper
+      isHovered={isHovered}
+      onMouseEnter={showScrollBar}
+      onMouseLeave={hideScrollBar}
+    >
       <MenuBar>
-        <Logo>
-          <Image src={LogoImage} />
-          DragonDeezTube
-        </Logo>
+        <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Logo>
+            <Image src={LogoImage} />
+            DragonDeezTube
+          </Logo>
+        </Link>
         <MenuItem>
           <Home /> Homepage
         </MenuItem>
@@ -134,7 +145,15 @@ export default function Menu(props) {
           <HelpOutline /> Help
         </MenuItem>
         <MenuItem onClick={changeTheme}>
-          <WbSunny /> Light mode
+          {darkMode ? (
+            <>
+              <WbSunny /> Light mode
+            </>
+          ) : (
+            <>
+              <NightlightRound /> Dark mode
+            </>
+          )}
         </MenuItem>
       </MenuBar>
     </MenuWrapper>

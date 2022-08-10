@@ -5,26 +5,22 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Web site created using create-react-app" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet" />
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
     * {
-      font-family: "Inter";
+      font-family: 'Inter', sans-serif;
       margin: 0;
     }
   </style>
 
-  <title>React App</title>
+  <title>React Video App</title>
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <script>
-    const c = { light: "#ffffff", dark: "#1b1b1b" };
-    if (window && document.documentElement) {
-      const e = window.localStorage.getItem("theme");
-      document.documentElement.style.backgroundColor = e === 'true' ? c.dark : c.light
-    }
+    const c = { light: "#ffffff", dark: "#1b1b1b" }; if (window && document.documentElement) { const e = window.localStorage.getItem("theme"); document.documentElement.style.backgroundColor = e === 'true' ? c.dark : c.light }
   </script>
   <div id="root"></div>
 </body>
