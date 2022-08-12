@@ -6,7 +6,7 @@ import Navbar from './components/Navbar.jsx'
 import Home from './pages/Home.jsx'
 import Video from './pages/Video.jsx'
 import { darkTheme, lightTheme } from './utils/Theme.js'
-
+import './App.css'
 const Container = styled.div`
   display: flex;
 `

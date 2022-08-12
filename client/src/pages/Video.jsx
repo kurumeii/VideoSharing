@@ -1,11 +1,15 @@
 import {
+  PlaylistAdd,
+  Share,
   ThumbDownAltRounded,
   ThumbDownOffAltRounded,
   ThumbUpAltOutlined,
   ThumbUpAltRounded,
 } from '@mui/icons-material'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+import CommentSection from '../components/CommentSection.jsx'
+import ProfileChannel from '../components/ProfileChannel.jsx'
 
 const Container = styled.div`
   display: grid;
@@ -19,7 +23,9 @@ const Content = styled.div`
 const Recommendation = styled.div`
   justify-self: center;
 `
-const VideoWrapper = styled.div``
+const VideoWrapper = styled.div`
+  padding-bottom: 10px;
+`
 const VideoTitle = styled.h2`
   font-size: 17px;
 `
@@ -44,16 +50,62 @@ const Button = styled.div`
   gap: 5px;
   cursor: pointer;
 `
+
+const Hr = styled.hr`
+  margin: 1.2rem 0;
+  border: 1px solid ${({ theme }) => theme.lineBreak};
+`
+
+const initialValue = {
+  numberOfLike: 1,
+  numberOfDislike: 0,
+}
+
 function Video() {
-  const [isLiked, setLike] = useState(null)
+  const [videoLikeStatus, setVideoLikeStatus] = useState(() => {
+    return {
+      isLiked: localStorage.getItem('videoLikeStatus') === 'liked',
+      isDisliked: localStorage.getItem('videoLikeStatus') === 'disliked',
+      numberOfLike: initialValue.numberOfLike,
+      numberOfDislike: initialValue.numberOfDislike,
+    }
+  })
+
+  const videoHeight = useMemo(() => (window.innerHeight * 65) / 100, [])
+
   const handleLikeVideo = () => {
-    setLike(!isLiked)
-    localStorage.setItem('videoLiked', !isLiked)
+    setVideoLikeStatus(prev => {
+      return {
+        ...prev,
+        isLiked: !prev.isLiked,
+        isDisliked: false,
+        numberOfLike: !prev.isLiked
+          ? prev.numberOfLike + 1
+          : initialValue.numberOfLike,
+      }
+    })
+  }
+
+  const handleDislikeVideo = () => {
+    setVideoLikeStatus(prev => {
+      return {
+        ...prev,
+        isDisliked: !prev.isDisliked,
+        isLiked: false,
+        numberOfDislike: !prev.isDisliked
+          ? prev.numberOfDislike === 0
+            ? prev.numberOfDislike + 1
+            : prev.numberOfDislike - 1
+          : initialValue.numberOfDislike,
+      }
+    })
   }
 
   useEffect(() => {
-    const savedLike = localStorage.getItem('videoLiked')
-    setLike(savedLike === 'true')
+    document.title = `${window.location.pathname.replace(
+      '/video/',
+      ''
+    )} - DragonDeezTube`
   }, [])
 
   return (
@@ -62,11 +114,11 @@ function Video() {
         <VideoWrapper>
           <iframe
             width='100%'
-            height={(window.innerHeight * 65) / 100}
-            src='https://www.youtube.com/embed/NIevmV_OGUI'
+            height={videoHeight}
+            src='https://www.youtube-nocookie.com/embed/hv4cR1OIuds?autoplay=1'
             title='YouTube video player'
-            frameBorder='0'
-            allowFullScreen
+            frameborder='0'
+            allowfullscreen
           ></iframe>
         </VideoWrapper>
         <VideoTitle>Test Video</VideoTitle>
@@ -75,85 +127,50 @@ function Video() {
           <ButtonContainer>
             <Button
               onClick={handleLikeVideo}
-              title={isLiked ? 'Unliked it' : 'Like it'}
+              title={videoLikeStatus.isLiked ? 'Unliked it' : 'Like it'}
             >
-              {isLiked ? (
+              {videoLikeStatus.isLiked ? (
                 <>
-                  <ThumbUpAltRounded htmlColor='#881b7fdd' /> 1.1k
+                  <ThumbUpAltRounded htmlColor='#881b7fdd' />{' '}
+                  {videoLikeStatus.numberOfLike}
                 </>
               ) : (
                 <>
-                  <ThumbUpAltOutlined /> 1.1k
+                  <ThumbUpAltOutlined /> {videoLikeStatus.numberOfLike}
                 </>
               )}
             </Button>
             <Button
-              onClick={handleLikeVideo}
-              title={isLiked ? 'Undislike it' : 'i dislike it'}
+              onClick={handleDislikeVideo}
+              title={
+                videoLikeStatus.isDisliked ? 'Undislike it' : 'i dislike it'
+              }
             >
-              {!isLiked ? (
+              {videoLikeStatus.isDisliked ? (
                 <>
-                  <ThumbDownAltRounded htmlColor='#881b7fdd' /> 2
+                  <ThumbDownAltRounded htmlColor='#881b7fdd' />
+                  {videoLikeStatus.numberOfDislike}
                 </>
               ) : (
                 <>
-                  <ThumbDownOffAltRounded /> 1
+                  <ThumbDownOffAltRounded /> {videoLikeStatus.numberOfDislike}
                 </>
               )}
             </Button>
-            <Button>Button</Button>
+            <Button>
+              <Share /> Share
+            </Button>
+            <Button>
+              <PlaylistAdd /> Save
+            </Button>
           </ButtonContainer>
         </VideoDetail>
+        <Hr />
+        <ProfileChannel />
+        <Hr />
+        <CommentSection />
       </Content>
-      <Recommendation>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-        <p>Recommendation here</p>
-      </Recommendation>
+      <Recommendation></Recommendation>
     </Container>
   )
 }

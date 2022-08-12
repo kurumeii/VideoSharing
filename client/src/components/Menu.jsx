@@ -11,7 +11,7 @@ import {
   VideoLibrary,
   WbSunny,
 } from '@mui/icons-material'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import LogoImage from '../img/website-logo.png'
@@ -80,7 +80,6 @@ const LoginButton = styled.button`
 
 export default function Menu(props) {
   const { darkMode, setDarkMode } = props
-  const [isHovered, setHover] = useState(false)
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme')
     setDarkMode(savedTheme === 'true')
@@ -93,16 +92,8 @@ export default function Menu(props) {
     })
   }, [setDarkMode])
 
-  const showScrollBar = () => setHover(true)
-
-  const hideScrollBar = () => setHover(false)
-
   return (
-    <MenuWrapper
-      isHovered={isHovered}
-      onMouseEnter={showScrollBar}
-      onMouseLeave={hideScrollBar}
-    >
+    <MenuWrapper>
       <MenuBar>
         <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
           <Logo>
