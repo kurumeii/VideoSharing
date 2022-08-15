@@ -9,7 +9,7 @@ import {
 import React, { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import CommentSection from '../components/CommentSection.jsx'
-import ProfileChannel from '../components/ProfileChannel.jsx'
+import ProfileSummary from '../components/ProfileSummary.jsx'
 
 const Container = styled.div`
   display: grid;
@@ -117,8 +117,8 @@ function Video() {
             height={videoHeight}
             src='https://www.youtube-nocookie.com/embed/hv4cR1OIuds?autoplay=1'
             title='YouTube video player'
-            frameborder='0'
-            allowfullscreen
+            frameBorder={0}
+            allowFullScreen
           ></iframe>
         </VideoWrapper>
         <VideoTitle>Test Video</VideoTitle>
@@ -166,7 +166,7 @@ function Video() {
           </ButtonContainer>
         </VideoDetail>
         <Hr />
-        <ProfileChannel />
+        <ProfileSummary />
         <Hr />
         <CommentSection />
       </Content>

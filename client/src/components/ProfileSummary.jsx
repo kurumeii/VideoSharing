@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 const Container = styled.div``
 
@@ -29,6 +29,7 @@ const ProfileWrapper = styled.div`
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+  padding-bottom: 1.5rem;
   > div {
     display: flex;
     align-items: center;
@@ -37,16 +38,19 @@ const ProfileWrapper = styled.div`
 `
 
 const ChannelImg = styled.img`
-  width: 3rem;
-  height: 3rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
   background-color: #a3a3a3;
 `
 const ProfileInfo = styled.div``
-const VideoDescriptionWrapper = styled.p``
+const VideoDescriptionWrapper = styled.p`
+  margin-left: ${({ MoveLeft }) => `${MoveLeft}px`};
+`
 const Paragraph = styled.p`
   font-size: 14px;
   font-weight: bold;
+  word-break: break-word;
 `
 const Span = styled.span`
   font-size: 12px;
@@ -59,7 +63,17 @@ const A = styled.a`
   }
 `
 
-function ProfileChannel() {
+function ProfileSummary() {
+  const profileRef = useRef(null)
+  const descRef = useRef(null)
+  const [moveHowMuch, setMove] = useState(0)
+
+  useLayoutEffect(() => {
+    const profileLeft = profileRef.current.getBoundingClientRect().left
+    const descLeft = descRef.current.getBoundingClientRect().left
+    setMove(Math.floor(profileLeft - descLeft))
+  }, [])
+
   return (
     <Container>
       <ProfileWrapper>
@@ -74,7 +88,7 @@ function ProfileChannel() {
               src='https://yt3.ggpht.com/ytc/AMLnZu9KDVUSwXG0ffKJj7abAHfm4MPZkyQp6aeI7_hUJg=s88-c-k-c0x00ffffff-no-rj'
             />
           </A>
-          <ProfileInfo>
+          <ProfileInfo ref={profileRef}>
             <A
               href='https://www.youtube.com/channel/UCgrqQOjae9gCdY1Kfk1ePfQ'
               target='_blank'
@@ -88,9 +102,9 @@ function ProfileChannel() {
         </div>
         <Button>Subscribe</Button>
       </ProfileWrapper>
-      <VideoDescriptionWrapper>
-        Doja cat & Rihanna streets × needed me Thankss for watching!! (◍•ᴗ•◍)
-        I'm not the owner of this song, I just speed up the music.If there is a
+      <VideoDescriptionWrapper ref={descRef} MoveLeft={moveHowMuch}>
+        Doja cat & Rihanna streets × needed me. Thankss for watching!! (◍•ᴗ•◍)
+        I'm not the owner of this song, I just speed up the music. If there is a
         problem with the song or pictures please contact me 💬 ig //hznylee
         Pitch//mangachainsawman
       </VideoDescriptionWrapper>
@@ -98,4 +112,4 @@ function ProfileChannel() {
   )
 }
 
-export default ProfileChannel
+export default ProfileSummary

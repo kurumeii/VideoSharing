@@ -36,11 +36,11 @@ const Search = styled.div`
 const Input = styled.input`
   border: none;
   border-color: transparent;
-  width: 100%;
   padding: 1rem;
-  box-sizing: border-box;
+  width: 100%;
   background-color: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.text};
+
   &:focus-visible,
   &:focus {
     outline: none;
